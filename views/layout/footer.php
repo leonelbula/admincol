@@ -6,6 +6,8 @@
 <script src="<?= URL_BASE ?>assets/js/tablaSolicitudes.js"></script>
 <script src="<?= URL_BASE ?>assets/js/anexotransaciones.js"></script>
 <script src="<?= URL_BASE ?>assets/js/tablaTransacionesProcesar.js"></script>
+<script src="<?= URL_BASE ?>assets/js/tablaComentario.js"></script>
+<script src="<?= URL_BASE ?>assets/js/gestorNotificaciones.js"></script>
 
 </body>
 </html>

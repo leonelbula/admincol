@@ -13,7 +13,7 @@ class DatosEmpresa{
 	private $departamento;
 	private $ciudad;
 	private $telefono;
-	private $fecha_inicio;
+	private $logo;
 			
 	function getId() {
 		return $this->id;
@@ -42,10 +42,10 @@ class DatosEmpresa{
 	function getTelefono() {
 		return $this->telefono;
 	}
-	function getFecha_inicio() {
-		return $this->fecha_inicio;
+	function getLogo() {
+		return $this->logo;
 	}
-
+	
 	function setId($id) {
 		$this->id = $id;
 	}
@@ -73,10 +73,10 @@ class DatosEmpresa{
 	function setTelefono($telefono) {
 		$this->telefono = $telefono;
 	}
-	function setFecha_inicio($fecha_inicio) {
-		$this->fecha_inicio = $fecha_inicio;
+	function setLogo($logo) {
+		$this->logo = $logo;
 	}
-
+	
 		
 	public function __construct() {
 		$this->db = Database::connect();
@@ -105,7 +105,7 @@ class DatosEmpresa{
 	}
 	public function Actualizar() {
 		$sql = "UPDATE datos_empresa SET nombre='{$this->getNombre()}',nit='{$this->getNit()}',direccion='{$this->getDireccion()}',"
-		. "departamento='{$this->getDepartamento()}',ciudad='{$this->getCiudad()}',telefono='{$this->getTelefono()}','{$this->getFecha_inicio()}' WHERE id = {$this->getId()}";
+		. "departamento='{$this->getDepartamento()}',ciudad='{$this->getCiudad()}',telefono='{$this->getTelefono()}',logo='{$this->getLogo()}' WHERE id = {$this->getId()}";
 		$resp = $this->db->query($sql);
 		$result = FALSE;
 		if($resp){

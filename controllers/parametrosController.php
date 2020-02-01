@@ -1,6 +1,7 @@
 <?php
 
 require_once 'models/DatosEmpresa.php';
+require_once 'models/DatosConsignacion.php';
 
 
 class ParametrosController{
@@ -11,6 +12,7 @@ class ParametrosController{
 		$detallesEmpresa = $informacion ->MostrarInformacion();
 		$detallesEditar  = $informacion ->MostrarInformacion();	
 		$detallesConsignacion = $informacion ->DatosCuenta();
+		$detallesConsignacion2 = $informacion ->DatosCuenta();
 		require_once 'views/parametros/datosEmpresa.php';
 		require_once 'views/layout/copy.php';
 	}
@@ -24,11 +26,7 @@ class ParametrosController{
 		$detallesEmpresa = $informacion ->MostrarParrametro();
 		return $detallesEmpresa;
 	}
-	static public function Comisiones() {
-		$com = new Comisiones();
-		$listaCom = $com->MostrarDetalles();
-		return $listaCom;
-	}
+	
 	public function Guardar() {
 		if($_POST){
 			$nit = isset($_POST['nit']) ? $_POST['nit']:FALSE;
@@ -97,7 +95,7 @@ class ParametrosController{
 			$departamento = isset($_POST['departamento']) ? $_POST['departamento']:FALSE;
 			$ciudad = isset($_POST['ciudad']) ? $_POST['ciudad']:FALSE;
 			$telefono = isset($_POST['telefono']) ? $_POST['telefono']:FALSE;
-			$fecha_inicio = date('Y-m-d');
+			
 			
 			
 			if($nit && $nombre && $direccion){
@@ -108,10 +106,85 @@ class ParametrosController{
 				$datosEmp->setDireccion($direccion);
 				$datosEmp->setDepartamento(ucwords($departamento));
 				$datosEmp->setCiudad(ucwords($ciudad));
-				$datosEmp->setTelefono($telefono);
+				$datosEmp->setTelefono($telefono);				
+				
+				$file = $_FILES['imagen'];				
+				$fileNom = $file['name'];
+				$type = $file['type'];
+				
+				$dir = 'image/logo';
+				
+				if ($type == 'image/jpg' || $type == 'image/jpeg' || $type == 'image/png') {
+					
+					if(!is_dir($dir)){
+						mkdir($dir, 0777,TRUE);
+					}
+					$datosEmp->setLogo($fileNom);
+					move_uploaded_file($file['tmp_name'],$dir.'/'.$fileNom);
+					
+				}else{
+					$fileNom = "";
+					$datosEmp->setLogo($fileNom);
+				}
 				
 				
 				$respt = $datosEmp->Actualizar();
+					
+				if($respt){
+					echo'<script>
+
+					swal({
+						  type: "success",
+						  title: "Informacion Actulizada Correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+					</script>';
+				}else{
+					echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡Registro no Actulizado !",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+			  	</script>';
+				}
+			}
+		}
+	}
+	
+	public function actulizardatoscuenta() {
+		if($_POST['id']){
+			$id = $_POST['id'];
+			$numero = isset($_POST['numero']) ? $_POST['numero']:FALSE;
+			$nombre = isset($_POST['nombre']) ? $_POST['nombre']:FALSE;
+			
+			
+			
+			if($id && $nombre && $numero){
+				
+				$datos = new DatosConsignacion();
+				$datos->setId($id);
+				$datos->setNombre($nombre);
+				$datos->setNumero($numero);
+				
+				$respt = $datos->Actualizar();
 								
 				if($respt){
 					echo'<script>

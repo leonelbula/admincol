@@ -3,6 +3,7 @@
 require_once 'models/Transacciones.php';
 require_once 'models/Solicitudes.php';
 require_once 'models/Principal.php';
+require_once 'models/Notificaciones.php';
 
 class homeController{
 	
@@ -27,6 +28,11 @@ class homeController{
 	   require_once 'views/usuario/listausuario.php';
 	   require_once 'views/layout/copy.php';
    }
+   static public function Notificaciones() {
+		$notificaciones = new Notificaciones();
+		$Notificacion = $notificaciones->MostrarNotificacione();
+		return $Notificacion;
+	}
 	
 }
 

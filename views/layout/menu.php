@@ -36,23 +36,49 @@ if (!isset($_SESSION['identity'])) {
       </a>	  
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">        
-        
+         <?php
+			$Notificacion = homeController::Notificaciones();
+			
+			while ($row = $Notificacion->fetch_object()) {
+				$consignacion = $row->consignacion;
+				$usuario = $row->usuario;
+				$comentario = $row->comentario;
+				$confirmacion = $row->confirmacion;
+			}
+			 $totalNotificacion = $consignacion + $usuario + $comentario + $confirmacion;
+	 
+	  ?>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">0</span>
+              <span class="label label-warning"><?=$totalNotificacion?></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">Hay 0 notificaciones</li>
+              <li class="header">Hay <?=$totalNotificacion?> notificaciones</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
-					  <a href="" class="actualizarNotificaciones" item="producto_stock">
-                      <i class="fa fa-shopping-cart text-red"></i> 0 Hay Productos Stock bajo
+					  <a href="" class="actualizarNotificaciones" item="consignacion">
+                      <i class="fa fa-laptop text-red"></i> <?=$consignacion?>  consignacion nuevas
                     </a>
-                  </li>                  
+                  </li>
+				  <li>
+					  <a href="" class="actualizarNotificaciones" item="usuario">
+                      <i class="fa fa-users text-red"></i> <?=$usuario?>  Usuario nuevos
+                    </a>
+                  </li>  
+				  <li>
+					  <a href="" class="actualizarNotificaciones" item="comentario">
+                      <i class="fa fa-table text-red"></i> <?=$comentario?> comentarios nuevos
+                    </a>
+                  </li>  
+				  <li>
+					  <a href="" class="actualizarNotificaciones" item="confirmacion">
+                      <i class="fa fa-dashboard text-red"></i> <?=$confirmacion?>  consignacion realizadas
+                    </a>
+                  </li>  
 <!--                  <li>
                     <a href="" class="actualizarNotificaciones" item="cliente_mora">
                       <i class="fa fa-users text-red"></i>  Tienes Clientes mora
@@ -163,7 +189,20 @@ if (!isset($_SESSION['identity'])) {
                    
           </ul>
         </li>
-	
+	<li class="treeview">
+          <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>COMENTARIOS</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+			  <li><a href="<?=URL_BASE?>comentario/"><i class="fa fa-circle-o"></i> LISTA COMENTARIO</a></li>
+            
+                   
+          </ul>
+        </li>
 	
         <li class="treeview">
           <a href="#">
