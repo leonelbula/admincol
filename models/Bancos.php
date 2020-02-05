@@ -8,6 +8,7 @@ class Bancos{
 	private $id_banco;
 	private $nombre;
 	private $estado;
+	private $tasa;
 	private $img;
 	
 			
@@ -22,7 +23,12 @@ class Bancos{
 	function getEstado() {
 		return $this->estado;
 	}
+	
+	function getTasa() {
+		return $this->tasa;
+	}
 
+		
 	function getImg() {
 		return $this->img;
 	}
@@ -39,6 +45,10 @@ class Bancos{
 		$this->estado = $estado;
 	}
 
+	function setTasa($tasa) {
+		$this->tasa = $tasa;
+	}
+		
 	function setImg($img) {
 		$this->img = $img;
 	}
@@ -64,7 +74,7 @@ class Bancos{
 		return $resul;
 	}
 	public function Guardar() {
-		$sql = "INSERT INTO bancos VALUES (NULL,'{$this->getNombre()}',{$this->getEstado()},'{$this->getImg()}')";
+		$sql = "INSERT INTO bancos VALUES (NULL,'{$this->getNombre()}',{$this->getEstado()},'{$this->getImg()}','{$this->getTasa()}')";
 		$resp = $this->db->query($sql);
 		$result = FALSE;
 		if($resp){

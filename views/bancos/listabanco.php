@@ -39,6 +39,7 @@
 
 							<th style="width:10px">Codigo</th>
 							<th>Nombre</th>
+							<th>tasa</th>
 							<th>Imagen</th>
 							<th>Acciones</th>
 
@@ -105,6 +106,17 @@
 
 						</div>
 						<div class="form-group">
+
+							<div class="input-group">
+
+								<span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+								<input type="number" step="0.0001" class="form-control input-lg  tasa" placeholder="Ingresar la tasa del banco" name="tasa" required> 
+
+							</div> 
+
+						</div>
+						<div class="form-group ">
 							<label>Estado</label>
 							<select class="form-control select2 seleccionarestado" style="width: 100%;" name="estado" required>
 
@@ -191,6 +203,17 @@
 								<span class="input-group-addon"><i class="fa fa-th"></i></span>
 
 								<input type="text" class="form-control input-lg  nombre" placeholder="Ingresar Nombre banco" name="nombrebanco" required> 
+
+							</div> 
+
+						</div>
+						<div class="form-group">
+
+							<div class="input-group">
+
+								<span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+								<input type="number" step="0.0001" class="form-control input-lg  tasa" placeholder="Ingresar la tasa del banco" name="tasa" required> 
 
 							</div> 
 

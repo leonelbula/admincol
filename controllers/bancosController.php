@@ -4,9 +4,7 @@ require_once 'models/Bancos.php';
 class bancosController{
 	
 	public function index() {
-		require_once 'views/layout/menu.php';	
-		$bancos = new Bancos();
-		$detalles = $bancos->ListarBancos();
+		require_once 'views/layout/menu.php';			
 		require_once 'views/bancos/listabanco.php';
 	}
 	static public function ListabancosId($id_banco) {
@@ -21,13 +19,17 @@ class bancosController{
 		return $detalles;
 	}
 	public function registrarbancos() {
+		require_once 'views/layout/menu.php';			
+		require_once 'views/bancos/listabanco.php';
 		if($_POST['nombrebanco']){
 			$nombre = isset($_POST['nombrebanco']) ? $_POST['nombrebanco']:FALSE;
+			$tasa = isset($_POST['tasa']) ? $_POST['tasa']:FALSE;
 			$estado = isset($_POST['estado']) ? $_POST['estado']:FALSE;
 			if($nombre && $estado){
 				$banco = new Bancos();
 				$banco->setNombre($nombre);
 				$banco->setEstado($estado);
+				$banco->setTasa($tasa);
 				
 				$file = $_FILES['imagen'];
 				$fileNom = $file['name'];
@@ -49,6 +51,7 @@ class bancosController{
 				}
 				
 				$resp = $banco->Guardar();
+				
 				if($resp){
 					echo'<script>
 
@@ -122,6 +125,8 @@ class bancosController{
 		}
 	}
 	public function actulizar() {
+		require_once 'views/layout/menu.php';			
+		require_once 'views/bancos/listabanco.php';
 		if($_POST['id']){
 			
 			$id = isset($_POST['id']) ? $_POST['id'] : FALSE;

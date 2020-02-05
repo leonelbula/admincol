@@ -46,6 +46,8 @@ BORRAR PRODUCTO
 =============================================*/
 var rutaOculta = $("#rutaOculta").val();
 
+
+
 $(".tablalistabanco").on("click", ".btnEliminarBanco", function(){
 
   var idbanco= $(this).attr("idbanco");
@@ -68,7 +70,7 @@ $(".tablalistabanco").on("click", ".btnEliminarBanco", function(){
   })
 
 })
-var rutaOculta = $("#rutaOculta").val();
+
 $(".tablalistabanco").on("click", ".btnEditarBanco", function(){
 
  var idbanco= $(this).attr("idbanco");
@@ -92,9 +94,10 @@ $(".tablalistabanco").on("click", ".btnEditarBanco", function(){
 			$("#modalEditarbanco .id").val(respuesta["id"]);
 			
 			$("#modalEditarbanco .nombre").val(respuesta["nombre"]);
+			$("#modalEditarbanco .tasa").val(respuesta["tasa"]);
 			$("#modalEditarbanco .img").val(respuesta["img"]);
 			
-				$(".previsualizar").attr("src",  rutaOculta+"image/bancos/"+respuesta["img"]);
+			$(".previsualizar").attr("src",  rutaOculta+"image/bancos/"+respuesta["img"]);
 			
 			if(respuesta["estado"] != 1){
 			

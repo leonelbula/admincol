@@ -40,3 +40,28 @@
 	}
 
 } );
+
+var rutaOculta = $("#rutaOculta").val();
+
+$(".tablalistausuario").on("click", ".btnUsuario", function(){
+
+  var id= $(this).attr("idusuario");
+
+  swal({
+        title: '¿Está seguro de realizar esta accion?',
+        text: "¡Si no lo está puede cancelar la accíón!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si !'
+      }).then(function(result){
+        if (result.value) {
+          
+            window.location = rutaOculta+"home/bloquear&id="+id;
+        }
+
+  })
+
+})

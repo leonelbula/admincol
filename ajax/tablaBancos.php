@@ -36,7 +36,8 @@ class BancoAjax {
 		  		 
 		  	$datosJson .='[
 			      "'.$row->id.'",			      
-			      "'.$row->nombre.'",			     				 
+			      "'.$row->nombre.'",
+				  "'.$row->tasa.'",
 				  "'.$imagenPrincipal.'",					 		  
 			      "'.$botones.'"
 			    ],';

@@ -62,12 +62,12 @@ class Usuario{
 		$this->db = Database::connect();
 	}
 	public function MostrarTodos() {
-		$sql = "SELECT * FROM usuarios ";
+		$sql = "SELECT * FROM usuario ";
 		$resul = $this->db->query($sql);
 		return $resul;
 	}
 	public function MostrarUsuarioId() {
-		$sql = "SELECT * FROM usuarios WHERE id_usuario = {$this->getId_usuario()}";
+		$sql = "SELECT * FROM usuario WHERE id = {$this->getId_usuario()}";
 		$resul = $this->db->query($sql);
 		return $resul;
 	}
@@ -95,6 +95,17 @@ class Usuario{
 	}
 	public function Eliminar() {
 		$sql = "DELETE FROM usuarios WHERE id_usuario = {$this->getId_usuario()} ";
+		$save = $this->db->query($sql);
+		
+		$resul = false;
+		
+		if($save){
+			 $resul = true;
+		}
+		return $resul;
+	}
+	public function Bloquear() {
+		$sql = "UPDATE usuario SET estado = {$this->getEstado()} WHERE id = {$this->getId_usuario()} ";
 		$save = $this->db->query($sql);
 		
 		$resul = false;

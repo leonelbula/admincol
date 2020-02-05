@@ -15,6 +15,11 @@ class Usuario {
 		$resul = $this->db->query($sql);
 		return $resul;
 	}
+	public function Usuarios($id) {
+		$sql = "SELECT * FROM usuario WHERE id = $id; ";
+		$resul = $this->db->query($sql);
+		return $resul;
+	}
 	
 }
 
@@ -30,8 +35,20 @@ class usuarioAjax {
 		
 		
 		$url = URL_BASE;
+		$id = $row->id_usuario;
+		$datos = $usuario->Usuarios($id);
 		
-  		$botones = "<div class='btn-group'><a><button class='btn btn-success btnEditarBanco' idtransaccion=$row->id><i class='fa fa-check-circle'></i> Bloquear</button></a></div>";
+		while ($row1 = $datos ->fetch_object()) {
+			$estado = $row1->estado;
+		}
+		
+		if($estado == 2){
+			$botones = "<div class='btn-group'><a><button class='btn btn-success btnUsuario' idusuario='$row->id_usuario'><i class='fa fa-check-circle'></i> desbloquear</button></a></div>";
+		}else{
+			$botones = "<div class='btn-group'><a><button class='btn btn-danger btnUsuario' idusuario='$row->id_usuario'><i class='fa fa-check-circle'></i> Bloquear</button></a></div>";
+		}
+		
+  		
   			 
 		  	$datosJson .='[
 			      "'.$row->id.'",			      
